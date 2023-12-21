@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>STATUS FORM ARJUN</title>
+</head>
+
+
+<body>
+
+  <h3>Personnel Details</h3>
+  <div class="center" id="form">
+    <table>
+ <tr>
+        <td class="right">
+          <label>First Name:</label>
+        </td>
+        <td>
+          <input id="first_name" type="text">
+        </td>
+      </tr>
+      <tr>
+        <td class="right">
+          <label>Last Name:</label>
+        </td>
+        <td>
+          <input id="last_name" type="text">
+        </td>
+      </tr>
+      <tr>
+        <td class="right">
+          <label>Gender :</label>
+        </td>
+        <td>
+          <select name="gender" id="genderid" > 
+	   <option value=""disabled selected >Please Choose...</option>
+            <option value="other">other</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </td>
+      </tr>
+     
+      <tr>
+        <td class="right">
+          <label>Address:</label>
+        </td>
+        <td>
+          <input id="address" type="text">
+        </td>
+      </tr>
+	<tr>
+          <td class="right">
+          <label>State:</label>
+        </td>
+	<td>
+	<select name="state" id="state_id">
+	 <option value=""disabled selected >Please Choose...</option>
+            <option value="kerala">kerala</option>
+            <option value="Tamil Nadu">TamilNadu</option>
+            <option value="Karnataka">Karnataka</option>
+          </select>
+        </td>
+      </tr>
+      
+      <tr>
+        <td class="right">
+          <label>Email:</label>
+        </td>
+        <td>
+          <input id="email" type="email" pattern=".+@example\.com" size="30" required />
+        </td>
+      </tr>
+      <tr>
+        <td class="right">
+          <label>DOB:</label>
+        </td>
+        <td>
+          <input type="date" name="issue_date" value="" min="1900-01-01" max="2100-12-31" id="	">
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align:center;">
+          <div>
+            <button onclick="onVerify()">Verify</button>
+          </div>
+        </td>
+      </tr>
+
+
+
+    </table>
+    <!-- Created -->
+    <table id="table-output">
+      <!-- Dynamicly Cretaed for javascript -->
+    </table>
+  </div>
+
+  <div id="verify">
+    <br>
+    <br>
+    <div id="verifyName" class="center">
+    </div>
+    <div class="verify">
+      <!-- Changed center to verify  -->
+      <button onclick="onCommit()">Commit</button>
+      <button onclick="onCancel()">Cancel</button>
+    </div>
+
+  </div>
+  <div id="committed">
+    Committed! :)
+  </div>
+
+
+
+
+  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+
+
+  <script>
+    $(document).ready(function() {
+      document.getElementById("verify").style.display = "none";
+      document.getElementById("committed").style.display = "none";
+    })
+
+    function onVerify() {
+      document.getElementById("verifyName").innerHTML = 'First Name: ' + document.getElementById("first_name").value
+
+      document.getElementById("verify").style.display = "block";
+      getAllValues(); //  I'm running this function here because I want to see the table after verify is done.
+
+    }
+
+    function onCommit() {
+      document.getElementById("form").style.display = "none";
+      document.getElementById("verify").style.display = "none";
+      document.getElementById("committed").style.display = "block";
+    }
+
+    function onCancel() {
+      document.getElementById("form").style.display = "block";
+      document.getElementById("verify").style.display = "none";
+      document.getElementById("name").value = ""
+    }
+
+    //  I take value from all the inputs in my table and send it to another function. I suggest you divide your operations into functions, so that you can be more comfortable when you want to modify them, since they're all in the clear.
+    function getAllValues() {
+      const firstName = document.getElementById("first_name").value;
+      const lastName = document.getElementById("last_name").value;
+      const gender = document.getElementById("genderid").value;
+      const middleName = document.getElementById("last_name").value;
+      const email = document.getElementById("email").value;
+      const date = document.getElementById("date").value;
+      // Formating DATE
+      let newDate = date.split("-").reverse().join(".");
+      showTable(firstName, lastName, gender, middleName, email, newDate);
+    }
+
+
+    // this function will select the second table that we have defined on the html side and display on the screen, and place the value values that we have received according to what structure we want.
+    function showTable(salutation, firstName, lastName, middleName, email, date)  {
+      let table = document.getElementById("table-output");
+      table.innerHTML = ` 
+       
+      <tr>
+        <td class="right">
+          <label>First Name:</label>
+        </td>
+        <td>
+            ${firstname}
+        </td>
+      </tr>
+      <tr>
+        <td class="right">
+          <label>Last  Name:</label>
+        </td>
+        <td>
+          ${lastName}
+        </td>
+      </tr>
+      <tr>
+        <td class="right">
+          <label>Middle Name:</label>
+        </td>
+        <td>
+          ${lastName}
+        </td>
+      </tr>
+      <tr>
+        <td class="right">
+          <label>Last Name:</label>
+        </td>
+        <td>
+          ${middleName}
+        </td>
+      </tr>
+      <tr>
+        <td class="right">
+          <label>Email:</label>
+        </td>
+        <td>
+          ${email}
+
+        </td>
+      </tr>
+      <tr>
+        <td class="right">
+          <label>DOB:</label>
+        </td>
+        <td>
+          ${date}
+        </td>
+      </tr>
+      
+       
+       `
+
+
+    }
+  </script>
+
+  <!-- JAVASCRIPT -->
+
+</body>
+
+</html>
